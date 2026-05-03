@@ -12,10 +12,22 @@ the workflow-specific bits (roots, patterns, command templates) change each time
 
 ## Files
 
-- `fileset.py`       — the library. Single file, stdlib only, ~250 lines.
+- `fileset.py`       — the library. Single file, stdlib only.
+- `pyproject.toml`   — package metadata for editable installs with uv.
+- `uv.lock`          — uv lockfile for the local project environment.
 - `workflow_raw.py`  — example: delete orphan RAW files when JPG has been culled.
 - `workflow_music.py`— example: bidirectional FLAC↔MP3 mirror sync.
-- `repl_demo.py`     — annotated REPL session transcript. Run with `python -i repl_demo.py`.
+- `repl_demo.py`     — annotated REPL session transcript. Run with `uv run python -i repl_demo.py`.
+- `test_fileset.py`  — focused unittest coverage for core behavior.
+
+## Tooling
+
+- Default to `uv` for Python commands in this repository.
+- Project/package name is `fileskitchen`; import name is `fileset`.
+- Run tests with `uv run python -m unittest`.
+- Run scripts with `uv run python workflow_raw.py ...` and `uv run python workflow_music.py ...`.
+- Install editable with `uv pip install -e .` inside a uv-managed environment, or from another uv project with `uv add --editable /path/to/fileskitchen`.
+- Do not suggest `pip` unless the user explicitly asks for non-uv instructions.
 
 ## Core API
 

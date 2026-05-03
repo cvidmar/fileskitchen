@@ -41,16 +41,41 @@ called through `run_command()`.
 
 Use Python 3.10 or newer.
 
-Run the tests:
+This project defaults to `uv` for Python environment and command execution.
+The package/project name is `fileskitchen`; the Python import name is `fileset`.
+
+From the repo root, run the tests:
 
 ```bash
-python3 -m unittest
+uv run python -m unittest
 ```
 
 Open the annotated REPL demo:
 
 ```bash
-python3 -i repl_demo.py
+uv run python -i repl_demo.py
+```
+
+Run the workflow scripts from the repo root:
+
+```bash
+uv run python workflow_raw.py /photos/trip
+uv run python workflow_music.py
+```
+
+To make `from fileset import tree, files` available from outside this repo,
+install the project into a uv-managed environment:
+
+```bash
+uv venv
+uv pip install -e .
+uv run python -c "from fileset import tree, files; print(tree('.', 'py'))"
+```
+
+From another uv project, add this checkout as an editable dependency:
+
+```bash
+uv add --editable /path/to/fileskitchen
 ```
 
 Basic interactive use:
@@ -92,13 +117,13 @@ orphan if there is no `IMG_0051.JPG`.
 Preview what would be deleted:
 
 ```bash
-python3 workflow_raw.py /photos/trip
+uv run python workflow_raw.py /photos/trip
 ```
 
 Actually delete orphan RAW files:
 
 ```bash
-python3 workflow_raw.py /photos/trip --run
+uv run python workflow_raw.py /photos/trip --run
 ```
 
 The workflow is just:
@@ -128,19 +153,19 @@ Default roots are `/music/flac` and `/music/mp3`.
 Preview the sync plan:
 
 ```bash
-python3 workflow_music.py
+uv run python workflow_music.py
 ```
 
 Use custom roots:
 
 ```bash
-python3 workflow_music.py --flac /path/to/flac --mp3 /path/to/mp3
+uv run python workflow_music.py --flac /path/to/flac --mp3 /path/to/mp3
 ```
 
 Run the live sync:
 
 ```bash
-python3 workflow_music.py --flac /path/to/flac --mp3 /path/to/mp3 --run
+uv run python workflow_music.py --flac /path/to/flac --mp3 /path/to/mp3 --run
 ```
 
 The core pipeline is:
