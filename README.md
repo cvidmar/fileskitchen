@@ -1,5 +1,7 @@
 # Files Kitchen
 
+![Files Kitchen logo](fileskitchen.png)
+
 `Files Kitchen` is a small, stdlib-only Python library for file pipeline operations.
 The core primitive is a `FileSet`: a composable snapshot of paths that you can
 select, filter, compare, preview, and act on.
